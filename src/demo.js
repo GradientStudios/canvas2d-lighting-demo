@@ -1,6 +1,7 @@
 require([
   'Renderer',
   'InputController',
+  'SoftwareCursor',
   'VehicleView',
   'EaselJS',
 
@@ -9,6 +10,7 @@ require([
 ], function(
   Renderer,
   InputController,
+  SoftwareCursor,
   VehicleView,
   createjs
 ) {
@@ -25,6 +27,7 @@ require([
   renderer.setBackgroundColor( 'black' );
   document.body.appendChild( renderer.canvas );
   var input = new InputController( renderer.canvas );
+  var cursor = new SoftwareCursor( renderer, input );
   var vehicle = renderer.root.addChild( new VehicleView() );
 
   // Update sun position based on pointer position.
@@ -50,11 +53,14 @@ require([
       var normalsData = processToData( normalsImg );
 
       vehicleView.load( diffuseImg, normalsData );
+
+      cursor.load( queue.getResult( 'cursor' ));
     });
 
     queue.loadManifest([
       { id: 'diffuse', src: 'images/diffuse.png' },
-      { id: 'normals', src: 'images/normals.png' }
+      { id: 'normals', src: 'images/normals.png' },
+      { id: 'cursor',  src: 'images/sun.png'     }
     ]);
   }( vehicle ));
 

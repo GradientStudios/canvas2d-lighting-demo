@@ -8,6 +8,7 @@ require.config({
     NormalsCache: 'normalscache',
     RectRecord: 'rectrecord',
     Renderer: 'renderer',
+    SoftwareCursor: 'softwarecursor',
     VehicleView: 'vehicleview',
 
     lodash: 'http://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.0.1/lodash.min',
