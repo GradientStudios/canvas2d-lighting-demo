@@ -1,5 +1,6 @@
 require([
   'Renderer',
+  'InputController',
   'VehicleView',
   'EaselJS',
 
@@ -7,6 +8,7 @@ require([
   'PreloadJS'
 ], function(
   Renderer,
+  InputController,
   VehicleView,
   createjs
 ) {
@@ -22,41 +24,21 @@ require([
   var renderer = new Renderer( 400, 400 );
   renderer.setBackgroundColor( 'black' );
   document.body.appendChild( renderer.canvas );
+  var input = new InputController( renderer.canvas );
   var vehicle = renderer.root.addChild( new VehicleView() );
 
-  renderer.canvas.addEventListener( 'mousemove', function( e ) {
-    // Extract mouse position.
-    var posX = 0;
-    var posY = 0;
-
-    if ( !e ) { e = window.event; }
-
-    if ( e.pageX || e.pageY ) {
-      posX = e.pageX;
-      posY = e.pageY;
-    }
-
-    else if ( e.clientX || e.clientY ) {
-      posX = e.clientX + document.body.scrollLeft +
-        document.documentElement.scrollLeft;
-      posY = e.clientY + document.body.scrollTop +
-        document.documentElement.scrollTop;
-    }
-
-    // Get canvas rect.
-    var rect = renderer.canvas.getBoundingClientRect();
-    var midX = ( rect.left + rect.right  ) * 0.5;
-    var midY = ( rect.top  + rect.bottom ) * 0.5;
-
-    // Get pointer position.
-    var dx = posX - midX;
-    var dy = posY - midY;
+  // Update sun position based on pointer position.
+  input.on( 'pointermove', function( position ) {
+    // Get direction to sun from center, and rotate in coordinate
+    // space to proper 3D axes.
+    var dirX =  position[0];
+    var dirY = -position[1];
 
     // Assume mouse pointer is 200px "up" and normalize.
-    var invLength = 1 / Math.sqrt( dx * dx + dy * dy + 40000 );
-    gSunlight.direction[0] =  dx * invLength;
-    gSunlight.direction[1] = -dy * invLength;
-    gSunlight.direction[2] = 200 * invLength;
+    var invLength = 1 / Math.sqrt( dirX * dirX + dirY * dirY + 40000 );
+    gSunlight.direction[0] = dirX * invLength;
+    gSunlight.direction[1] = dirY * invLength;
+    gSunlight.direction[2] =  200 * invLength;
   });
 
   (function loadImages( vehicleView ) {
