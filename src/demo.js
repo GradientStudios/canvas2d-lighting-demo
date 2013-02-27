@@ -65,6 +65,7 @@ require([
   }( vehicle ));
 
   createjs.Ticker.useRAF = true;
+  createjs.Ticker.setFPS( 60 );
   createjs.Ticker.addEventListener( 'tick', function() {
     renderer.stage.update( gSunlight );
   });
