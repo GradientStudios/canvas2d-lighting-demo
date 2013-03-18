@@ -1,0 +1,132 @@
+body {
+    font-family: "Bitstream Charter", Garamond, "New Century Schoolbook", Georgia, serif;
+}
+
+.step {
+    position: relative;
+    width: 900px;
+    padding: 40px;
+    margin: 20px auto;
+
+    font-size: 48px;
+    line-height: 1.5;
+}
+
+.impress-enabled .step {
+    margin: 0;
+    opacity: 0.25;
+
+    -webkit-transition: opacity 1s;
+       -moz-transition: opacity 1s;
+        -ms-transition: opacity 1s;
+         -o-transition: opacity 1s;
+            transition: opacity 1s;
+}
+
+.impress-enabled .step.active { opacity: 1; }
+
+.center { text-align: center; }
+
+div.inline {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+h1.image-header,
+h2.image-header,
+h3.image-header,
+h4.image-header,
+h5.image-header,
+h6.image-header {
+    margin: 10px 0;
+}
+
+#profile .picture {
+    float: left;
+    padding-left: 40px;
+}
+
+#profile .picture > img {
+    width: 200px;
+}
+
+#profile .bio {
+    float: left;
+    padding-left: 40px;
+
+    font-size: 36px;
+    line-height: 0.5;
+}
+
+#profile .bio .name {
+    margin-top: 15px;
+}
+
+#mesh-simplification img {
+    width: 300px;
+}
+
+#normal-map-example img {
+    height: 250px;
+}
+
+#layering img {
+    height: 250px;
+}
+
+#layering .anim-right {
+    -webkit-animation: merge-right 6s ease-in-out infinite;
+       -moz-animation: merge-right 6s ease-in-out infinite;
+}
+
+#layering .anim-left {
+    -webkit-animation: merge-left 6s ease-in-out infinite;
+       -moz-animation: merge-left 6s ease-in-out infinite;
+}
+
+#layering.future .anim-right {
+    -webkit-animation: none;
+       -moz-animation: none;
+}
+
+#layering.future .anim-left {
+    -webkit-animation: none;
+       -moz-animation: none;
+}
+
+#fin {
+    font-size: 32px;
+    line-height: 1;
+}
+
+@-webkit-keyframes merge-right {
+    0%   { -webkit-transform: translateX(0px); }
+    16%  { -webkit-transform: translateX(0px); }
+    33%  { -webkit-transform: translateX(139px); }
+    83%  { -webkit-transform: translateX(139px); }
+    100% { -webkit-transform: translateX(0px); }
+}
+
+@-moz-keyframes merge-right {
+    0%   { -moz-transform: translateX(0px); }
+    16%  { -moz-transform: translateX(0px); }
+    33%  { -moz-transform: translateX(139px); }
+    83%  { -moz-transform: translateX(139px); }
+    100% { -moz-transform: translateX(0px); }
+}
+
+@-webkit-keyframes merge-left {
+    0%   { -webkit-transform: translateX(0px); }
+    16%  { -webkit-transform: translateX(0px); }
+    33%  { -webkit-transform: translateX(-139px); }
+    83%  { -webkit-transform: translateX(-139px); }
+    100% { -webkit-transform: translateX(0px); }
+}
+
+@-moz-keyframes merge-left {
+    0%   { -moz-transform: translateX(0px); }
+    16%  { -moz-transform: translateX(0px); }
+    33%  { -moz-transform: translateX(-139px); }
+    83%  { -moz-transform: translateX(-139px); }
+    100% { -moz-transform: translateX(0px); }
+}

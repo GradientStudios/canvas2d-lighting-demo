@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1024" />
+  <title>Lighting Effects in Canvas2D</title>
+
+  <link href="style.css" rel="stylesheet" />
+
+  <meta name="author" content="Eric Li" />
+</head>
+<body class="impress-not-supported">
+  <div id="impress">
+    <div id="title" class="step slide" data-x="0" data-y="750" data-z="-1500">
+      <h1>A Lightning Talk on Lighting Effects in Canvas2D</h1>
+    </div>
+
+    <div id="profile" class="step slide" data-x="750" data-y="0" data-z="-1500" data-rotate="-90">
+      <div class="picture">
+        <img src="http://en.gravatar.com/avatar/4ab4b320906a7e110283778ef4cfb2ba?s=512"/>
+      </div>
+      <div class="bio">
+        <h1 class="name">Eric Li</h1>
+        <p>Developer at Gradient Studios</p>
+        <p>Studied Computer Graphics at RPI</p>
+      </div>
+    </div>
+
+    <div id="normal-mapping" class="step slide" data-x="0" data-y="0" data-z="1500" data-rotate-y="90" data-rotate-x="-90">
+      <h2><i>Normal Mapping</i></h2>
+      <p>A technique for re-adding detail back into a simplified mesh</p>
+    </div>
+
+    <div id="mesh-simplification" class="step slide" data-y="1200" data-z="1500" data-rotate-y="90" data-rotate-x="-90">
+      <h2><i>Mesh Simplification</i></h2>
+      <p>Reducing the polygon count of a model for use in real-time applications, e.g. games</p>
+
+      <div class="center">
+        <div class="inline">
+          <h5 class="image-header">Complex</h5>
+          <img src="images/complex.png" />
+        </div>
+
+        <div class="inline">
+          <h5 class="image-header">Simplified</h5>
+          <img src="images/simple.png" />
+        </div>
+      </div>
+    </div>
+
+    <div id="normal-map-example" class="step slide" data-x="900" data-y="-250" data-z="950" data-rotate-y="90" data-rotate-x="-90">
+      <div class="center">
+        <div class="inline">
+          <h5 class="image-header">Diffuse</h5>
+          <img src="images/diffuse-example.png" />
+        </div>
+
+        <div class="inline">
+          <h5 class="image-header">Normals</h5>
+          <img src="images/normals-example.png" />
+        </div>
+      </div>
+    </div>
+
+    <div class="step slide" data-x="1500" data-y="-250" data-z="1200" data-rotate-y="180" data-rotate-x="-90">
+      <p>Unlike WebGL, Canvas2D has <strong>no shaders or texture buffers,</strong> so how do we make use of these normal maps?</p>
+    </div>
+
+    <div class="step slide" data-x="2700" data-y="-250" data-z="1200" data-rotate-y="180" data-rotate-x="-90">
+      <p>To extract the normals from the normal map, we use <tt>getImageData</tt>.</p>
+    </div>
+
+    <div class="step slide center" data-x="2700" data-y="-250" data-z="600" data-rotate-y="180" data-rotate-x="-90">
+      <p>What about drawing the result?</p>
+    </div>
+
+    <div class="step slide" data-x="3900" data-y="-250" data-z="600" data-rotate-y="360" data-rotate-x="-270">
+      <p><tt>putImageData</tt> is <em>slooooow</em>. Really slow. We’ll need to find a way to layer images to achieve the shading we want.</p>
+    </div>
+
+    <div id="shading-desc" class="step slide" data-x="3900" data-y="-250" data-z="1200" data-rotate-y="360" data-rotate-x="-270">
+      <p>We can’t draw light, but we can draw darkness. By using the alpha channel, we have access to multiplication. We make the image black, then set</p>
+      <p class="center">opacity = (1 - light)</p>
+    </div>
+
+    <div id="layering" class="step slide center" data-x="3900" data-y="-250" data-z="1800" data-rotate-y="360" data-rotate-x="-270">
+      <div class="inline">
+        <h5 class="image-header">Diffuse</h5>
+        <img class="anim-right layer-under" src="images/diffuse-example.png" />
+      </div>
+
+      <div class="inline">
+        <h5 class="image-header">Shading</h5>
+        <img class="anim-left layer-over" src="images/shadows-example.png" />
+      </div>
+    </div>
+
+    <div id="game-demo" class="step slide center" data-x="0" data-y="0" data-z="-500"></div>
+
+    <div id="fin" class="step slide center" data-x="850" data-y="750" data-z="-500" data-rotate="-30">
+      <p>Demo: <a href="http://gradientstudios.github.com/canvas2d-lighting-demo">gradientstudios.github.com/canvas2d-lighting-demo</a></p>
+      <p>@tJener</p>
+    </div>
+  </div>
+
+  <script src="lib/impress.js"></script>
+  <script>impress().init();</script>
+
+  <script data-main="src/config" src="vendor/requirejs/require.js"></script>
+</body>
+</html>
