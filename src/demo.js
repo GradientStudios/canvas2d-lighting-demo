@@ -25,7 +25,8 @@ require([
 
   var renderer = new Renderer( 400, 400 );
   renderer.setBackgroundColor( 'black' );
-  document.body.appendChild( renderer.canvas );
+  var parent = document.getElementById( 'game-demo' ) || document.body;
+  parent.appendChild( renderer.canvas );
   var input = new InputController( renderer.canvas );
   var cursor = new SoftwareCursor( renderer, input );
   var vehicle = renderer.root.addChild( new VehicleView() );
